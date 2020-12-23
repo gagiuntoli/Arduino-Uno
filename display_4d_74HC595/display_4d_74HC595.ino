@@ -65,8 +65,26 @@ void setup()
   digitalWrite(PIN_D4, HIGH);
 }
 
+void num_to_array(int num, int num_array[4])
+{
+  int i = 0;
+  while (num > 0) {
+    num_array[3 - i] = num % 10;
+    num /= 10;
+    i++;
+  }
+}
+
+int num = 5000;
+
 void loop()
 {
-  int num[4] = {1, 9, 8, 4};
-  multiplex_num(num, 1);
+  int num_array[4];
+  num_to_array(num, num_array);
+  int i = 0;
+  while(i < 100) {
+    multiplex_num(num_array, 1);
+    i++;
+  }
+  num--;
 }
